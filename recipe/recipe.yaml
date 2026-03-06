@@ -17,7 +17,7 @@ source:
     - fix-missing-tfile-include.patch
 
 build:
-  number: 0
+  number: 1
   skip:
     - win
     - match(root_base, "<6.36")
@@ -44,9 +44,11 @@ requirements:
     - root_cxx_standard
     - libboost-python-devel
     - python
+    - onnxruntime
   run:
     - python
     - pyyaml
+    - onnxruntime
 
 tests:
   - package_contents:
