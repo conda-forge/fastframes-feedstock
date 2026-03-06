@@ -44,9 +44,11 @@ requirements:
     - root_cxx_standard
     - libboost-python-devel
     - python
+    - onnxruntime
   run:
     - python
     - pyyaml
+    - onnxruntime
 
 tests:
   - package_contents:
