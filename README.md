@@ -334,4 +334,5 @@ Feedstock Maintainers
 =====================
 
 * [@kratsg](https://github.com/kratsg/)
+* [@p-queue](https://github.com/p-queue/)
 
