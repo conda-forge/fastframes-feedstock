@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "5.5.0"
+  version: "6.4.0"
 
 package:
   name: fastframes
@@ -9,7 +9,7 @@ package:
 
 source:
   url: https://gitlab.cern.ch/atlas-amglab/fastframes/-/archive/v${{ version }}/fastframes-v${{ version }}.tar.gz
-  sha256: 77d0a1f0f5685b31f9d62a245fe571be7db062988b37e5915a6c3eb08c2f7bca
+  sha256: 901b4908594a108e5790ebb45cbf695a044c35093d82a757d081adda04e23f2c
   patches:
     - fix-root-6-38-compat.patch
     - install-python-files.patch
@@ -17,7 +17,7 @@ source:
     - fix-missing-tfile-include.patch
 
 build:
-  number: 1
+  number: 0
   skip:
     - win
     - match(root_base, "<6.36")
