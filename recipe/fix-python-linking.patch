@@ -1,7 +1,7 @@
 From 4dd5361dddc5757bcc42c1cd5ec0c696e169140d Mon Sep 17 00:00:00 2001
 From: Giordon Stark <kratsg@gmail.com>
 Date: Tue, 10 Mar 2026 06:00:39 -0700
-Subject: [PATCH] fix python linking
+Subject: [PATCH 3/6] fix python linking
 
 ---
  CMakeLists.txt | 21 ++++++++++++---------

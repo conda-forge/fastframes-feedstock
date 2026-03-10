@@ -1,25 +1,25 @@
-From 827ab3d4a99f5810ef475655b102e8809489b680 Mon Sep 17 00:00:00 2001
+From 88f5dc7f382d729f18790c52f0ab543ae46177a0 Mon Sep 17 00:00:00 2001
 From: Giordon Stark <kratsg@gmail.com>
 Date: Tue, 10 Mar 2026 12:47:17 -0700
-Subject: [PATCH] drop .so
+Subject: [PATCH 6/6] drop .so
 
 ---
  CMakeLists.txt | 5 ++---
  1 file changed, 2 insertions(+), 3 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 1d04fe9..54fc29b 100644
+index 162463f..85f6ce0 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -129,7 +129,6 @@ endif()
+@@ -91,7 +91,6 @@ file(GLOB SOURCES "Root/*.cc" )
+ file(GLOB LIB_HEADERS "FastFrames/*.h" )
  
- # Build the shared library.
  add_library( FastFrames SHARED ${LIB_HEADERS} ${SOURCES} )
 -set_target_properties(FastFrames PROPERTIES SUFFIX ".so")
- target_include_directories( FastFrames PUBLIC $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}> ${ONNXRUNTIME_INCLUDE_DIRS} )
- target_include_directories(FastFrames SYSTEM PUBLIC ${ONNXRUNTIME_INCLUDE_DIRS} )
- target_link_libraries( FastFrames PUBLIC ROOT::Core ROOT::Hist ROOT::RIO ROOT::Tree ROOT::ROOTDataFrame ROOT::ROOTVecOps ${ONNXRUNTIME_LIBRARIES} )
-@@ -138,14 +137,14 @@ set_property( TARGET FastFrames
+ target_include_directories(FastFrames
+   PUBLIC
+     $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}>
+@@ -118,14 +117,14 @@ endif()
  
  # Build the Python module for C++ logger
  add_library( cppLogger MODULE python_wrapper/utils/Logger.cxx )

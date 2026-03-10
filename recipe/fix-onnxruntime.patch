@@ -1,25 +1,55 @@
-From 31887e84b5f66db4e6c43ad87c89e5907e4ffa4c Mon Sep 17 00:00:00 2001
+From 2255ea52c1bb672f57259cba028a91cb3ef799e1 Mon Sep 17 00:00:00 2001
 From: Giordon Stark <kratsg@gmail.com>
 Date: Tue, 10 Mar 2026 06:02:44 -0700
-Subject: [PATCH] fix onnxruntime
+Subject: [PATCH 5/6] fix onnxruntime
 
 ---
- CMakeLists.txt           | 20 ++------------------
+ CMakeLists.txt           | 86 +++++++++++++---------------------------
  FastFrames/ONNXWrapper.h |  2 +-
- 2 files changed, 3 insertions(+), 19 deletions(-)
+ 2 files changed, 28 insertions(+), 60 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index f00bf67..1d04fe9 100644
+index f00bf67..162463f 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -94,21 +94,8 @@ file(GLOB LIB_HEADERS "FastFrames/*.h" )
+@@ -80,7 +80,7 @@ endif()
+ find_package( ROOT 6.28.00 REQUIRED COMPONENTS Core Hist RIO Tree ROOTDataFrame ROOTVecOps)
+ find_package( Python3 COMPONENTS Development.Module REQUIRED )
+ find_package( LCG QUIET )
+-find_package( onnxruntime QUIET )
++find_package( onnxruntime CONFIG QUIET )
+ 
+ include_directories(${CMAKE_SOURCE_DIR})
+ # ------------------------------------------------
+@@ -90,68 +90,32 @@ include_directories(${CMAKE_SOURCE_DIR})
+ file(GLOB SOURCES "Root/*.cc" )
+ file(GLOB LIB_HEADERS "FastFrames/*.h" )
+ 
++add_library( FastFrames SHARED ${LIB_HEADERS} ${SOURCES} )
++set_target_properties(FastFrames PROPERTIES SUFFIX ".so")
++target_include_directories(FastFrames
++  PUBLIC
++    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}>
++)
++target_link_libraries(FastFrames
++  PUBLIC
++    ROOT::Core
++    ROOT::Hist
++    ROOT::RIO
++    ROOT::Tree
++    ROOT::ROOTDataFrame
++    ROOT::ROOTVecOps
++)
++
++set_property(TARGET FastFrames PROPERTY PUBLIC_HEADER ${LIB_HEADERS})
+ # ------------------------------------------------
  # ONNXWrapper conditional compilation
  # ------------------------------------------------
- 
+-
 -# Define a variable for the ONNX module path. Allow it to be set from the command line.
 -set(ONNXRUNTIME_ROOTDIR "" CACHE PATH "Path to the ONNX Runtime installation directory")
 -
- # Check if onnxruntime was found
+-# Check if onnxruntime was found
 -if(onnxruntime_FOUND OR NOT ONNXRUNTIME_ROOTDIR STREQUAL "")
 -   if (onnxruntime_FOUND)
 -      message(STATUS "onnxruntime found at: ${onnxruntime_DIR}")
@@ -31,27 +61,69 @@ index f00bf67..1d04fe9 100644
 -      set(ONNXRUNTIME_LIBRARIES ${ONNXRUNTIME_ROOTDIR}/lib/libonnxruntime.so)
 -   endif()
 -
-+if( onnxruntime_FOUND )
-    # This is necessary for Mac installations because
-    # the onnxruntime executable can be found without the paths being set
-    if ((NOT DEFINED ONNXRUNTIME_INCLUDE_DIRS) AND (NOT DEFINED ONNXRUNTIME_LIBRARIES))
-@@ -132,15 +119,12 @@ if(onnxruntime_FOUND OR NOT ONNXRUNTIME_ROOTDIR STREQUAL "")
-       message(STATUS "Found ONNXRUNTIME_LIBRARIES: ${ONNXRUNTIME_LIBRARIES}")
-    endif()
- 
-+   message(STATUS "ONNX Runtime found - Enabling ONNXWrapper")
-    message(STATUS "ONNXRUNTIME_INCLUDE_DIRS: ${ONNXRUNTIME_INCLUDE_DIRS}")
-    message(STATUS "ONNXRUNTIME_LIBRARIES: ${ONNXRUNTIME_LIBRARIES}")
-    add_definitions(-DONNXRUNTIME_AVAILABLE)
- else()
-    message(STATUS "ONNX Runtime not found - Disabling ONNXWrapper")
+-   # This is necessary for Mac installations because
+-   # the onnxruntime executable can be found without the paths being set
+-   if ((NOT DEFINED ONNXRUNTIME_INCLUDE_DIRS) AND (NOT DEFINED ONNXRUNTIME_LIBRARIES))
+-      message(STATUS "ONNXRUNTIME_ROOTDIR not set, need to search for ONNXRUNTIME_INCLUDE_DIRS and ONNXRUNTIME_LIBRARIES")
+-      find_path(ONNXRUNTIME_INCLUDE_DIRS
+-         NAMES onnxruntime_c_api.h
+-         HINTS ${onnxruntime_DIR}/../include
+-               /usr/local/include
+-               /opt/homebrew/include/onnxruntime
+-               /usr/include
+-      )
+-      message(STATUS "Found ONNXRUNTIME_INCLUDE_DIRS: ${ONNXRUNTIME_INCLUDE_DIRS}")
+-
+-      find_library(ONNXRUNTIME_LIBRARIES
+-         NAMES onnxruntime libonnxruntime
+-         HINTS ${onnxruntime_DIR}/../lib
+-               /opt/homebrew/include/onnxruntime
+-               /opt/homebrew/lib
+-               /opt/homebrew/Cellar/
+-      )
+-      message(STATUS "Found ONNXRUNTIME_LIBRARIES: ${ONNXRUNTIME_LIBRARIES}")
+-   endif()
+-
+-   message(STATUS "ONNXRUNTIME_INCLUDE_DIRS: ${ONNXRUNTIME_INCLUDE_DIRS}")
+-   message(STATUS "ONNXRUNTIME_LIBRARIES: ${ONNXRUNTIME_LIBRARIES}")
+-   add_definitions(-DONNXRUNTIME_AVAILABLE)
+-else()
+-   message(STATUS "ONNX Runtime not found - Disabling ONNXWrapper")
 -
 -   # Remove ONNXWrapper source files from the lists
 -   #list(REMOVE_ITEM LIB_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/FastFrames/ONNXWrapper.h )
 -   #list(REMOVE_ITEM SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/Root/ONNXWrapper.cc )
++if(onnxruntime_FOUND)
++  message(STATUS "ONNX Runtime found")
++  target_link_libraries(FastFrames PUBLIC onnxruntime::onnxruntime)
++  target_compile_definitions(FastFrames PUBLIC ONNXRUNTIME_AVAILABLE)
  endif()
  
- # Build the shared library.
+-# Build the shared library.
+-add_library( FastFrames SHARED ${LIB_HEADERS} ${SOURCES} )
+-set_target_properties(FastFrames PROPERTIES SUFFIX ".so")
+-target_include_directories( FastFrames PUBLIC $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}> ${ONNXRUNTIME_INCLUDE_DIRS} )
+-target_include_directories(FastFrames SYSTEM PUBLIC ${ONNXRUNTIME_INCLUDE_DIRS} )
+-target_link_libraries( FastFrames PUBLIC ROOT::Core ROOT::Hist ROOT::RIO ROOT::Tree ROOT::ROOTDataFrame ROOT::ROOTVecOps ${ONNXRUNTIME_LIBRARIES} )
+-set_property( TARGET FastFrames
+-   PROPERTY PUBLIC_HEADER ${LIB_HEADERS} )
+-
+ # Build the Python module for C++ logger
+ add_library( cppLogger MODULE python_wrapper/utils/Logger.cxx )
+ set_target_properties(cppLogger PROPERTIES SUFFIX ".so" PREFIX "")
+@@ -175,7 +139,11 @@ endif()
+ set(SETUP ${CMAKE_CURRENT_BINARY_DIR}/setup.sh)
+ file(WRITE ${SETUP} "#!/bin/bash\n")
+ file(APPEND ${SETUP} "# this is an auto-generated setup script\n" )
+-file(APPEND ${SETUP} "export LD_LIBRARY_PATH=\${LD_LIBRARY_PATH}:${CMAKE_INSTALL_PREFIX}/lib\n")
++if(APPLE)
++  file(APPEND ${SETUP} "export DYLD_LIBRARY_PATH=\${DYLD_LIBRARY_PATH}:${CMAKE_INSTALL_PREFIX}/lib\n")
++else()
++  file(APPEND ${SETUP} "export LD_LIBRARY_PATH=\${LD_LIBRARY_PATH}:${CMAKE_INSTALL_PREFIX}/lib\n")
++endif()
+ file(APPEND ${SETUP} "export PATH=\${PATH}:${CMAKE_CURRENT_SOURCE_DIR}/python\n")
+ 
+ # Install the libraries.
 diff --git a/FastFrames/ONNXWrapper.h b/FastFrames/ONNXWrapper.h
 index c88ab47..66ad648 100644
 --- a/FastFrames/ONNXWrapper.h

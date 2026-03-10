@@ -1,7 +1,7 @@
 From 624fca56781717cf8801e83e2a0aa11d6de11340 Mon Sep 17 00:00:00 2001
 From: Giordon Stark <kratsg@gmail.com>
 Date: Tue, 10 Mar 2026 05:57:48 -0700
-Subject: [PATCH] install python files
+Subject: [PATCH 2/6] install python files
 
 ---
  CMakeLists.txt                                | 21 ++++++++++++++++++-
