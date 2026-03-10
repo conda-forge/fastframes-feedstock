@@ -1,11 +1,24 @@
+From 03892524dbc5b0c12b3708fc9c935ec7061f2a08 Mon Sep 17 00:00:00 2001
+From: Giordon Stark <kratsg@gmail.com>
+Date: Tue, 10 Mar 2026 06:01:12 -0700
+Subject: [PATCH 4/6] fix missing tfile include
+
+---
+ Root/Utils.cc | 1 +
+ 1 file changed, 1 insertion(+)
+
 diff --git a/Root/Utils.cc b/Root/Utils.cc
+index 028e56e..1d40ea6 100644
 --- a/Root/Utils.cc
 +++ b/Root/Utils.cc
 @@ -11,6 +11,7 @@
-
+ 
  #include "TChain.h"
  #include "TTreeIndex.h"
 +#include "TFile.h"
-
+ 
  #include <algorithm>
  #include <exception>
+-- 
+2.45.2
+
