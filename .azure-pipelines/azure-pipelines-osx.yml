@@ -68,66 +68,6 @@ jobs:
         CONFIG: osx_64_python3.14.____cp314root_base6.38.0root_cxx_standard23
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
-      osx_arm64_python3.10.____cpythonroot_base6.36.8root_cxx_standard20:
-        CONFIG: osx_arm64_python3.10.____cpythonroot_base6.36.8root_cxx_standard20
-        UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
-      osx_arm64_python3.10.____cpythonroot_base6.38.0root_cxx_standard20:
-        CONFIG: osx_arm64_python3.10.____cpythonroot_base6.38.0root_cxx_standard20
-        UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
-      osx_arm64_python3.10.____cpythonroot_base6.38.0root_cxx_standard23:
-        CONFIG: osx_arm64_python3.10.____cpythonroot_base6.38.0root_cxx_standard23
-        UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
-      osx_arm64_python3.11.____cpythonroot_base6.36.8root_cxx_standard20:
-        CONFIG: osx_arm64_python3.11.____cpythonroot_base6.36.8root_cxx_standard20
-        UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
-      osx_arm64_python3.11.____cpythonroot_base6.38.0root_cxx_standard20:
-        CONFIG: osx_arm64_python3.11.____cpythonroot_base6.38.0root_cxx_standard20
-        UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
-      osx_arm64_python3.11.____cpythonroot_base6.38.0root_cxx_standard23:
-        CONFIG: osx_arm64_python3.11.____cpythonroot_base6.38.0root_cxx_standard23
-        UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
-      osx_arm64_python3.12.____cpythonroot_base6.36.8root_cxx_standard20:
-        CONFIG: osx_arm64_python3.12.____cpythonroot_base6.36.8root_cxx_standard20
-        UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
-      osx_arm64_python3.12.____cpythonroot_base6.38.0root_cxx_standard20:
-        CONFIG: osx_arm64_python3.12.____cpythonroot_base6.38.0root_cxx_standard20
-        UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
-      osx_arm64_python3.12.____cpythonroot_base6.38.0root_cxx_standard23:
-        CONFIG: osx_arm64_python3.12.____cpythonroot_base6.38.0root_cxx_standard23
-        UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
-      osx_arm64_python3.13.____cp313root_base6.36.8root_cxx_standard20:
-        CONFIG: osx_arm64_python3.13.____cp313root_base6.36.8root_cxx_standard20
-        UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
-      osx_arm64_python3.13.____cp313root_base6.38.0root_cxx_standard20:
-        CONFIG: osx_arm64_python3.13.____cp313root_base6.38.0root_cxx_standard20
-        UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
-      osx_arm64_python3.13.____cp313root_base6.38.0root_cxx_standard23:
-        CONFIG: osx_arm64_python3.13.____cp313root_base6.38.0root_cxx_standard23
-        UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
-      osx_arm64_python3.14.____cp314root_base6.36.8root_cxx_standard20:
-        CONFIG: osx_arm64_python3.14.____cp314root_base6.36.8root_cxx_standard20
-        UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
-      osx_arm64_python3.14.____cp314root_base6.38.0root_cxx_standard20:
-        CONFIG: osx_arm64_python3.14.____cp314root_base6.38.0root_cxx_standard20
-        UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
-      osx_arm64_python3.14.____cp314root_base6.38.0root_cxx_standard23:
-        CONFIG: osx_arm64_python3.14.____cp314root_base6.38.0root_cxx_standard23
-        UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
   timeoutInMinutes: 360
   variables: {}
 
