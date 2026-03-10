@@ -1,24 +1,39 @@
+From 295b72eaca4fbaf2f3a70cacfed1ec4fd6cac393 Mon Sep 17 00:00:00 2001
+From: Giordon Stark <kratsg@gmail.com>
+Date: Tue, 10 Mar 2026 05:57:07 -0700
+Subject: [PATCH] fix root 6.38 compat
+
+---
+ CMakeLists.txt         | 2 +-
+ FastFrames/MainFrame.h | 2 ++
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+
 diff --git a/CMakeLists.txt b/CMakeLists.txt
 index da1654d..8ed271b 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -31,7 +31,7 @@ set( CMAKE_INSTALL_LIBDIR ${CMAKE_BINARY_DIR}/lib )  # Needed by ROOT_GENERATE_D
  set(FastFrames_INCLUDE_DIRS "${CMAKE_INSTALL_PREFIX}/include" CACHE STRING "Path to the includes")
-
+ 
  # Set the warning flag(s) to use.
 -set( CMAKE_CXX_FLAGS "-Wall -Wextra -Wshadow -pedantic -O3 -g" )
 +set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wshadow -pedantic -O3 -g" )
-
+ 
  set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
-
+ 
 diff --git a/FastFrames/MainFrame.h b/FastFrames/MainFrame.h
+index 1e57d00..0d85bbd 100644
 --- a/FastFrames/MainFrame.h
 +++ b/FastFrames/MainFrame.h
-@@ -17,6 +17,8 @@
+@@ -16,6 +16,8 @@
+ 
  #include "ROOT/RDataFrame.hxx"
  #include "TClass.h"
 +#include "TChain.h"
 +#include "TFile.h"
-
+ 
  #include <memory>
  #include <string>
+-- 
+2.45.2
+

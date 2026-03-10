@@ -1,7 +1,17 @@
+From 4dd5361dddc5757bcc42c1cd5ec0c696e169140d Mon Sep 17 00:00:00 2001
+From: Giordon Stark <kratsg@gmail.com>
+Date: Tue, 10 Mar 2026 06:00:39 -0700
+Subject: [PATCH] fix python linking
+
+---
+ CMakeLists.txt | 21 ++++++++++++---------
+ 1 file changed, 12 insertions(+), 9 deletions(-)
+
 diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 95c3494..f00bf67 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -78,7 +78,7 @@
+@@ -78,7 +78,7 @@ if( EXISTS "${Boost_INCLUDE_DIR}/root" )
  endif()
  # Add ROOT system directory and require ROOT.
  find_package( ROOT 6.28.00 REQUIRED COMPONENTS Core Hist RIO Tree ROOTDataFrame ROOTVecOps)
@@ -9,8 +19,10 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
 +find_package( Python3 COMPONENTS Development.Module REQUIRED )
  find_package( LCG QUIET )
  find_package( onnxruntime QUIET )
-
-@@ -155,16 +155,22 @@
+ 
+@@ -153,21 +153,24 @@ set_property( TARGET FastFrames
+    PROPERTY PUBLIC_HEADER ${LIB_HEADERS} )
+ 
  # Build the Python module for C++ logger
 -add_library( cppLogger SHARED python_wrapper/utils/Logger.cxx )
 -set_target_properties(cppLogger PROPERTIES SUFFIX ".so")
@@ -21,7 +33,7 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
  set_target_properties( cppLogger PROPERTIES
 -   PREFIX ""
     OUTPUT_NAME "cppLogger" )
-
+ 
  # Build the Python module for config reader
 -add_library( ConfigReaderCpp SHARED python_wrapper/utils/ConfigReaderCpp.cxx ${LIB_HEADERS} )
 -set_target_properties(ConfigReaderCpp PROPERTIES SUFFIX ".so")
@@ -33,8 +45,14 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
  set_target_properties( ConfigReaderCpp PROPERTIES
 -   PREFIX ""
     OUTPUT_NAME "ConfigReaderCpp" )
-+
+ 
 +if(APPLE)
 +  target_link_options( cppLogger PRIVATE "LINKER:-undefined,dynamic_lookup" )
 +  target_link_options( ConfigReaderCpp PRIVATE "LINKER:-undefined,dynamic_lookup" )
 +endif()
+ 
+ set(SETUP ${CMAKE_CURRENT_BINARY_DIR}/setup.sh)
+ file(WRITE ${SETUP} "#!/bin/bash\n")
+-- 
+2.45.2
+

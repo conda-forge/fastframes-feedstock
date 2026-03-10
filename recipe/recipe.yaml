@@ -15,12 +15,13 @@ source:
     - install-python-files.patch
     - fix-python-linking.patch
     - fix-missing-tfile-include.patch
+    - fix-onnxruntime.patch
 
 build:
   number: 1
   skip:
     - win
-    - match(root_base, "<6.36")
+    #- match(root_base, "<6.36")
   script:
     - cmake ${CMAKE_ARGS} -DPython3_EXECUTABLE=$PYTHON -DPython3_INCLUDE_DIR=$PREFIX/include/python${PY_VER} -DFASTFRAMES_PYTHON_INSTALL_DIR=$SP_DIR -DONNXRUNTIME_INCLUDE_DIRS=$PREFIX/include/onnxruntime -DONNXRUNTIME_LIBRARIES=$PREFIX/lib/libonnxruntime.so -S . -B build
     - cmake --build build --clean-first --parallel="${CPU_COUNT}" --verbose
@@ -30,7 +31,7 @@ requirements:
   build:
     - ${{ compiler('c') }}
     - ${{ compiler("cxx") }}
-    - ${{ stdlib("c") }}
+    #- ${{ stdlib("c") }}
     - cmake
     - make
     - if: build_platform != target_platform
