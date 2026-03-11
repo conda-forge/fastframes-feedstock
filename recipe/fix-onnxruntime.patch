@@ -1,6 +1,18 @@
---- CMakeLists.txt.orig	2026-03-11 11:56:46
-+++ CMakeLists.txt	2026-03-11 11:58:14
-@@ -88,7 +88,7 @@
+From 98572fc24369058d39012a4aeefa6ec44c567357 Mon Sep 17 00:00:00 2001
+From: Ryan Quinn <quinn.ryanx@gmail.com>
+Date: Wed, 11 Mar 2026 12:07:42 -0700
+Subject: [PATCH] fix onnxruntime
+
+---
+ CMakeLists.txt           | 86 +++++++++++++---------------------------
+ FastFrames/ONNXWrapper.h |  2 +-
+ 2 files changed, 29 insertions(+), 59 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 9c270d5..b5526fd 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -88,7 +88,7 @@ endif()
  
  find_package( Python3 COMPONENTS Development REQUIRED )
  find_package( LCG QUIET )
@@ -9,7 +21,7 @@
  
  include_directories(${CMAKE_CURRENT_SOURCE_DIR})
  # ------------------------------------------------
-@@ -98,68 +98,34 @@
+@@ -98,68 +98,34 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
  file(GLOB SOURCES "Root/*.cc" )
  file(GLOB LIB_HEADERS "FastFrames/*.h" )
  
@@ -100,7 +112,7 @@
  # Build the Python module for C++ logger
  add_library( cppLogger SHARED python_wrapper/utils/Logger.cxx )
  set_target_properties(cppLogger PROPERTIES SUFFIX ".so")
-@@ -180,7 +146,11 @@
+@@ -180,7 +146,11 @@ set_target_properties( ConfigReaderCpp PROPERTIES
  set(SETUP ${CMAKE_CURRENT_BINARY_DIR}/setup.sh)
  file(WRITE ${SETUP} "#!/bin/bash\n")
  file(APPEND ${SETUP} "# this is an auto-generated setup script\n" )
@@ -113,3 +125,19 @@
  file(APPEND ${SETUP} "export PATH=\${PATH}:${CMAKE_CURRENT_SOURCE_DIR}/python\n")
  file(APPEND ${SETUP} "export FASTFRAMES_DIR=${CMAKE_CURRENT_SOURCE_DIR}\n")
  
+diff --git a/FastFrames/ONNXWrapper.h b/FastFrames/ONNXWrapper.h
+index c88ab47..66ad648 100644
+--- a/FastFrames/ONNXWrapper.h
++++ b/FastFrames/ONNXWrapper.h
+@@ -10,7 +10,7 @@
+ 
+ #include "FastFrames/Logger.h"
+ 
+-#include <onnxruntime_cxx_api.h>
++#include <onnxruntime/core/session/onnxruntime_cxx_api.h>
+ #include <vector>
+ 
+ /**
+-- 
+2.53.0
+
