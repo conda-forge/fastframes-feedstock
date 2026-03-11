@@ -19,7 +19,7 @@ source:
     - drop-so-suffix.patch
 
 build:
-  number: 3
+  number: 4
   skip:
     - win
     - match(root_base, "<6.36")
