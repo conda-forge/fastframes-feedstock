@@ -11,12 +11,7 @@ source:
   url: https://gitlab.cern.ch/atlas-amglab/fastframes/-/archive/v${{ version }}/fastframes-v${{ version }}.tar.gz
   sha256: 8a7ae28296cfc18c5fdafd863c54b4a8432bdcdd5fd028661763b390b2aa6e2c
   patches:
-    - fix-root-6-38-compat.patch
     - install-python-files.patch
-    - fix-python-linking.patch
-    - fix-missing-tfile-include.patch
-    - fix-onnxruntime.patch
-    - drop-so-suffix.patch
 
 build:
   number: 0
