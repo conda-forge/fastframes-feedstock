@@ -22,152 +22,102 @@ jobs:
       max-parallel: 50
       matrix:
         include:
-          - CONFIG: linux_64_python3.10.____cpythonroot_base6.36.8root_cxx_standard20
+          - CONFIG: linux_64_python3.10.____cpythonroot_cxx_standard20
             UPLOAD_PACKAGES: True
             os: ubuntu
             runs_on: ['ubuntu-latest']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-          - CONFIG: linux_64_python3.10.____cpythonroot_base6.38.0root_cxx_standard20
+          - CONFIG: linux_64_python3.10.____cpythonroot_cxx_standard23
             UPLOAD_PACKAGES: True
             os: ubuntu
             runs_on: ['ubuntu-latest']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-          - CONFIG: linux_64_python3.10.____cpythonroot_base6.38.0root_cxx_standard23
+          - CONFIG: linux_64_python3.11.____cpythonroot_cxx_standard20
             UPLOAD_PACKAGES: True
             os: ubuntu
             runs_on: ['ubuntu-latest']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-          - CONFIG: linux_64_python3.11.____cpythonroot_base6.36.8root_cxx_standard20
+          - CONFIG: linux_64_python3.11.____cpythonroot_cxx_standard23
             UPLOAD_PACKAGES: True
             os: ubuntu
             runs_on: ['ubuntu-latest']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-          - CONFIG: linux_64_python3.11.____cpythonroot_base6.38.0root_cxx_standard20
+          - CONFIG: linux_64_python3.12.____cpythonroot_cxx_standard20
             UPLOAD_PACKAGES: True
             os: ubuntu
             runs_on: ['ubuntu-latest']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-          - CONFIG: linux_64_python3.11.____cpythonroot_base6.38.0root_cxx_standard23
+          - CONFIG: linux_64_python3.12.____cpythonroot_cxx_standard23
             UPLOAD_PACKAGES: True
             os: ubuntu
             runs_on: ['ubuntu-latest']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-          - CONFIG: linux_64_python3.12.____cpythonroot_base6.36.8root_cxx_standard20
+          - CONFIG: linux_64_python3.13.____cp313root_cxx_standard20
             UPLOAD_PACKAGES: True
             os: ubuntu
             runs_on: ['ubuntu-latest']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-          - CONFIG: linux_64_python3.12.____cpythonroot_base6.38.0root_cxx_standard20
+          - CONFIG: linux_64_python3.13.____cp313root_cxx_standard23
             UPLOAD_PACKAGES: True
             os: ubuntu
             runs_on: ['ubuntu-latest']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-          - CONFIG: linux_64_python3.12.____cpythonroot_base6.38.0root_cxx_standard23
+          - CONFIG: linux_64_python3.14.____cp314root_cxx_standard20
             UPLOAD_PACKAGES: True
             os: ubuntu
             runs_on: ['ubuntu-latest']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-          - CONFIG: linux_64_python3.13.____cp313root_base6.36.8root_cxx_standard20
+          - CONFIG: linux_64_python3.14.____cp314root_cxx_standard23
             UPLOAD_PACKAGES: True
             os: ubuntu
             runs_on: ['ubuntu-latest']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-          - CONFIG: linux_64_python3.13.____cp313root_base6.38.0root_cxx_standard20
+          - CONFIG: linux_aarch64_python3.10.____cpythonroot_cxx_standard20
             UPLOAD_PACKAGES: True
             os: ubuntu
             runs_on: ['ubuntu-latest']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-          - CONFIG: linux_64_python3.13.____cp313root_base6.38.0root_cxx_standard23
+          - CONFIG: linux_aarch64_python3.10.____cpythonroot_cxx_standard23
             UPLOAD_PACKAGES: True
             os: ubuntu
             runs_on: ['ubuntu-latest']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-          - CONFIG: linux_64_python3.14.____cp314root_base6.36.8root_cxx_standard20
+          - CONFIG: linux_aarch64_python3.11.____cpythonroot_cxx_standard20
             UPLOAD_PACKAGES: True
             os: ubuntu
             runs_on: ['ubuntu-latest']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-          - CONFIG: linux_64_python3.14.____cp314root_base6.38.0root_cxx_standard20
+          - CONFIG: linux_aarch64_python3.11.____cpythonroot_cxx_standard23
             UPLOAD_PACKAGES: True
             os: ubuntu
             runs_on: ['ubuntu-latest']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-          - CONFIG: linux_64_python3.14.____cp314root_base6.38.0root_cxx_standard23
+          - CONFIG: linux_aarch64_python3.12.____cpythonroot_cxx_standard20
             UPLOAD_PACKAGES: True
             os: ubuntu
             runs_on: ['ubuntu-latest']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-          - CONFIG: linux_aarch64_python3.10.____cpythonroot_base6.36.8root_cxx_standard20
+          - CONFIG: linux_aarch64_python3.12.____cpythonroot_cxx_standard23
             UPLOAD_PACKAGES: True
             os: ubuntu
             runs_on: ['ubuntu-latest']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-          - CONFIG: linux_aarch64_python3.10.____cpythonroot_base6.38.0root_cxx_standard20
+          - CONFIG: linux_aarch64_python3.13.____cp313root_cxx_standard20
             UPLOAD_PACKAGES: True
             os: ubuntu
             runs_on: ['ubuntu-latest']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-          - CONFIG: linux_aarch64_python3.10.____cpythonroot_base6.38.0root_cxx_standard23
+          - CONFIG: linux_aarch64_python3.13.____cp313root_cxx_standard23
             UPLOAD_PACKAGES: True
             os: ubuntu
             runs_on: ['ubuntu-latest']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-          - CONFIG: linux_aarch64_python3.11.____cpythonroot_base6.36.8root_cxx_standard20
+          - CONFIG: linux_aarch64_python3.14.____cp314root_cxx_standard20
             UPLOAD_PACKAGES: True
             os: ubuntu
             runs_on: ['ubuntu-latest']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-          - CONFIG: linux_aarch64_python3.11.____cpythonroot_base6.38.0root_cxx_standard20
-            UPLOAD_PACKAGES: True
-            os: ubuntu
-            runs_on: ['ubuntu-latest']
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-          - CONFIG: linux_aarch64_python3.11.____cpythonroot_base6.38.0root_cxx_standard23
-            UPLOAD_PACKAGES: True
-            os: ubuntu
-            runs_on: ['ubuntu-latest']
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-          - CONFIG: linux_aarch64_python3.12.____cpythonroot_base6.36.8root_cxx_standard20
-            UPLOAD_PACKAGES: True
-            os: ubuntu
-            runs_on: ['ubuntu-latest']
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-          - CONFIG: linux_aarch64_python3.12.____cpythonroot_base6.38.0root_cxx_standard20
-            UPLOAD_PACKAGES: True
-            os: ubuntu
-            runs_on: ['ubuntu-latest']
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-          - CONFIG: linux_aarch64_python3.12.____cpythonroot_base6.38.0root_cxx_standard23
-            UPLOAD_PACKAGES: True
-            os: ubuntu
-            runs_on: ['ubuntu-latest']
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-          - CONFIG: linux_aarch64_python3.13.____cp313root_base6.36.8root_cxx_standard20
-            UPLOAD_PACKAGES: True
-            os: ubuntu
-            runs_on: ['ubuntu-latest']
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-          - CONFIG: linux_aarch64_python3.13.____cp313root_base6.38.0root_cxx_standard20
-            UPLOAD_PACKAGES: True
-            os: ubuntu
-            runs_on: ['ubuntu-latest']
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-          - CONFIG: linux_aarch64_python3.13.____cp313root_base6.38.0root_cxx_standard23
-            UPLOAD_PACKAGES: True
-            os: ubuntu
-            runs_on: ['ubuntu-latest']
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-          - CONFIG: linux_aarch64_python3.14.____cp314root_base6.36.8root_cxx_standard20
-            UPLOAD_PACKAGES: True
-            os: ubuntu
-            runs_on: ['ubuntu-latest']
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-          - CONFIG: linux_aarch64_python3.14.____cp314root_base6.38.0root_cxx_standard20
-            UPLOAD_PACKAGES: True
-            os: ubuntu
-            runs_on: ['ubuntu-latest']
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-          - CONFIG: linux_aarch64_python3.14.____cp314root_base6.38.0root_cxx_standard23
+          - CONFIG: linux_aarch64_python3.14.____cp314root_cxx_standard23
             UPLOAD_PACKAGES: True
             os: ubuntu
             runs_on: ['ubuntu-latest']
