@@ -13,7 +13,6 @@ source:
   sha256: 8a7ae28296cfc18c5fdafd863c54b4a8432bdcdd5fd028661763b390b2aa6e2c
   patches:
     - install-python-files.patch
-    - make-python-scripts-executable.patch
 
 build:
   number: 1

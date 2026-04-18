@@ -1,5 +1,5 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 493870e..afd96bf 100644
+index 493870e..43491e5 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -279,7 +279,7 @@ file(APPEND ${SETUP} "export PATH=\${PATH}:${CMAKE_CURRENT_SOURCE_DIR}/python\n"
@@ -11,7 +11,7 @@ index 493870e..afd96bf 100644
     EXPORT FastFramesTargets
     ARCHIVE DESTINATION lib
     LIBRARY DESTINATION lib
-@@ -305,6 +305,25 @@ install( FILES "${CMAKE_CURRENT_BINARY_DIR}/FastFramesConfig.cmake"
+@@ -305,6 +305,28 @@ install( FILES "${CMAKE_CURRENT_BINARY_DIR}/FastFramesConfig.cmake"
     DESTINATION lib/cmake/FastFrames )
  
  
@@ -19,8 +19,11 @@ index 493870e..afd96bf 100644
 +set(FASTFRAMES_PYTHON_INSTALL_DIR "" CACHE PATH "Install Python modules to this directory")
 +
 +if(FASTFRAMES_PYTHON_INSTALL_DIR)
-+  # Install Python entry point to bin/
-+  install(PROGRAMS python/FastFrames.py DESTINATION bin)
++  # Install Python entry points to bin/, excluding batch submission scripts
++  # as they will not work in a proper Python installation.
++  file(GLOB _python_entry_points "python/*.py")
++  list(REMOVE_ITEM _python_entry_points python/batch_submit.py python/copyDataToScratch.py)
++  install(PROGRAMS ${_python_entry_points} DESTINATION bin)
 +
 +  # Install Python extension modules (.so) to site-packages
 +  install(TARGETS ConfigReaderCpp cppLogger
