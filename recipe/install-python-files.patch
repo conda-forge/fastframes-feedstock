@@ -1,20 +1,9 @@
-From 624fca56781717cf8801e83e2a0aa11d6de11340 Mon Sep 17 00:00:00 2001
-From: Giordon Stark <kratsg@gmail.com>
-Date: Tue, 10 Mar 2026 05:57:48 -0700
-Subject: [PATCH 2/6] install python files
-
----
- CMakeLists.txt                                | 21 ++++++++++++++++++-
- .../ConfigReaderModules/BlockReaderCommon.py  |  5 +++++
- python/FastFrames.py                          | 18 +++++++++++-----
- 3 files changed, 38 insertions(+), 6 deletions(-)
-
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 8ed271b..95c3494 100644
+index 493870e..afd96bf 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -176,7 +176,7 @@ file(APPEND ${SETUP} "export LD_LIBRARY_PATH=\${LD_LIBRARY_PATH}:${CMAKE_INSTALL
- file(APPEND ${SETUP} "export PATH=\${PATH}:${CMAKE_CURRENT_SOURCE_DIR}/python\n")
+@@ -279,7 +279,7 @@ file(APPEND ${SETUP} "export PATH=\${PATH}:${CMAKE_CURRENT_SOURCE_DIR}/python\n"
+ file(APPEND ${SETUP} "export FASTFRAMES_DIR=${CMAKE_CURRENT_SOURCE_DIR}\n")
  
  # Install the libraries.
 -install( TARGETS FastFrames ConfigReaderCpp cppLogger
@@ -22,7 +11,7 @@ index 8ed271b..95c3494 100644
     EXPORT FastFramesTargets
     ARCHIVE DESTINATION lib
     LIBRARY DESTINATION lib
-@@ -202,6 +202,25 @@ install( FILES "${CMAKE_CURRENT_BINARY_DIR}/FastFramesConfig.cmake"
+@@ -305,6 +305,25 @@ install( FILES "${CMAKE_CURRENT_BINARY_DIR}/FastFramesConfig.cmake"
     DESTINATION lib/cmake/FastFrames )
  
  
@@ -65,10 +54,10 @@ index b06db04..70fdb5e 100644
      set_import_path()
      set_main_directory_path()
 diff --git a/python/FastFrames.py b/python/FastFrames.py
-index d42119d..9d490ca 100755
+index 158f6a5..d955cc1 100755
 --- a/python/FastFrames.py
 +++ b/python/FastFrames.py
-@@ -12,11 +12,19 @@ import os
+@@ -13,11 +13,19 @@ from pathlib import Path
  import sys
  import argparse
  
@@ -93,6 +82,3 @@ index d42119d..9d490ca 100755
  
  from ConfigReaderCpp import ConfigSettingWrapper, FastFramesExecutor
  from python_wrapper.python.logger import Logger
--- 
-2.45.2
-
