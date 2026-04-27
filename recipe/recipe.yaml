@@ -16,7 +16,7 @@ source:
     - install-python-files.patch
 
 build:
-  number: 2
+  number: 3
   skip:
     - win
   script:
