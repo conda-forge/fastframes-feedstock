@@ -13,11 +13,10 @@ Development: https://gitlab.cern.ch/atlas-amglab/fastframes
 
 Documentation: https://atlas-project-topreconstruction.web.cern.ch/fastframesdocumentation/latest/
 
-FastFrames is a package aimed at processing ntuples produced by
-TopCPToolkit, or a similar CP algorithm based framework, into histograms or
-ntuples.  FastFrames rely on ROOT's RDataFrame to do the event loop
-processing.  The code allows users to define their own columns in a minimal
-way while using all the functionality of the processing.
+FastFrames is a histogramming and ntuple reprocessing framework developed
+for the ATLAS Experiment. It is built around ROOT's RDataFrame, and is
+easily extendable so users can leverage RDataFrame to compute their
+desired physics observables.
 
 Current build status
 ====================
