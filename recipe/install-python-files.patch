@@ -1,20 +1,13 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 493870e..43491e5 100644
+index ecd24b5..0c93381 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -279,7 +279,7 @@ file(APPEND ${SETUP} "export PATH=\${PATH}:${CMAKE_CURRENT_SOURCE_DIR}/python\n"
- file(APPEND ${SETUP} "export FASTFRAMES_DIR=${CMAKE_CURRENT_SOURCE_DIR}\n")
+@@ -138,8 +138,27 @@ install(TARGETS FastFrames
+    PUBLIC_HEADER DESTINATION include/FastFrames COMPONENT headers
+ )
  
- # Install the libraries.
--install( TARGETS FastFrames ConfigReaderCpp cppLogger
-+install( TARGETS FastFrames
-    EXPORT FastFramesTargets
-    ARCHIVE DESTINATION lib
-    LIBRARY DESTINATION lib
-@@ -305,6 +305,28 @@ install( FILES "${CMAKE_CURRENT_BINARY_DIR}/FastFramesConfig.cmake"
-    DESTINATION lib/cmake/FastFrames )
- 
- 
+-install(TARGETS cppLogger ConfigReaderCpp
+-   LIBRARY DESTINATION lib COMPONENT python)
 +# Configurable Python module install directory (e.g. site-packages)
 +set(FASTFRAMES_PYTHON_INSTALL_DIR "" CACHE PATH "Install Python modules to this directory")
 +
@@ -36,12 +29,11 @@ index 493870e..43491e5 100644
 +  install(FILES python_wrapper/python/logger.py
 +     DESTINATION "${FASTFRAMES_PYTHON_INSTALL_DIR}/python_wrapper/python")
 +endif()
-+
- # ------------------------------------------------
- # FastFrames executables
+ 
+ 
  # ------------------------------------------------
 diff --git a/python/ConfigReaderModules/BlockReaderCommon.py b/python/ConfigReaderModules/BlockReaderCommon.py
-index b06db04..70fdb5e 100644
+index ab51933..cd61942 100644
 --- a/python/ConfigReaderModules/BlockReaderCommon.py
 +++ b/python/ConfigReaderModules/BlockReaderCommon.py
 @@ -8,6 +8,11 @@ def set_paths():
