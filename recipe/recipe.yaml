@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "7.1.0"
+  version: "7.1.1"
   root_version_spec: ">=6.38.00"
 
 package:
@@ -10,13 +10,13 @@ package:
 
 source:
   url: https://gitlab.cern.ch/atlas-amglab/fastframes/-/archive/v${{ version }}/fastframes-v${{ version }}.tar.gz
-  sha256: a546feb4378e7997819de512af2da52174a592e0539cfa4443d9d0b810629b77
+  sha256: f410083cc09231d15f5d523ec29396a28d4f6ce99e0f06cbe8e4384eb9d8f919
   patches:
     - use-usr-bin-env-for-all-python-scripts.patch
     - install-python-files.patch
 
 build:
-  number: 1
+  number: 0
   skip:
     - win
   script:
