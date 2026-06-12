@@ -12,7 +12,6 @@ source:
   url: https://gitlab.cern.ch/atlas-amglab/fastframes/-/archive/v${{ version }}/fastframes-v${{ version }}.tar.gz
   sha256: f410083cc09231d15f5d523ec29396a28d4f6ce99e0f06cbe8e4384eb9d8f919
   patches:
-    - use-usr-bin-env-for-all-python-scripts.patch
     - install-python-files.patch
 
 build:
