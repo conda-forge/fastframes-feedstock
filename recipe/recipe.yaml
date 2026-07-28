@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   version: "7.2.0"
-  root_version_spec: ">=6.38.00"
+  root_version_spec: ">=6.40.00"
 
 package:
   name: fastframes
