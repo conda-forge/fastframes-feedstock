@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "7.2.0"
+  version: "7.3.0"
   root_version_spec: ">=6.40.00"
 
 package:
@@ -14,12 +14,12 @@ source:
   # and all at once can each get an empty body (gitlab-org/gitlab#471955).
   # Re-run them; fetching the tarball once by hand first warms GitLab's cache.
   url: https://gitlab.cern.ch/atlas-amglab/fastframes/-/archive/v${{ version }}/fastframes-v${{ version }}.tar.gz
-  sha256: 69b3e4c8b2f100859dfdc08f2ab8c5a4eeb18c403b20131c7902608ab989fd16
+  sha256: 2a710b8d720a1c5fc709bbab1534499d403cf039fb239a576ce4a297f22adb04
   patches:
     - install-python-files.patch
 
 build:
-  number: 1
+  number: 0
   skip:
     - win
   script:
