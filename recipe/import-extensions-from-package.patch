@@ -1,0 +1,70 @@
+diff --git a/python/fastframes/_lib/__init__.py b/python/fastframes/_lib/__init__.py
+index 924efab6..75836b81 100644
+--- a/python/fastframes/_lib/__init__.py
++++ b/python/fastframes/_lib/__init__.py
+@@ -1,20 +1,27 @@
+ """
+ Access to the compiled C++ extension modules.
+ 
+-This is a temporary replacement for the old `set_paths()` helper which was used
+-to locate the compiled extensions. Eventually the extensions will be installed
+-inside _lib/, but for now this module locates them via:
++The extensions are always imported as submodules of this package, e.g.
++`fastframes._lib.cppLogger`. When installed (e.g. via conda), they live inside
++_lib/ itself. Otherwise this module locates them via:
+ - FASTFRAMES_LIB_DIR (exported by setup.sh)
+ - fallback to the old `set_paths()` method (in-tree build/lib)
++and adds that directory to this package's __path__.
+ 
+ """
+ import os
+-import sys
++from importlib.machinery import EXTENSION_SUFFIXES
+ from pathlib import Path
+ 
+-# Just to note that Python needs compiled C++ extensions to end in .so,
+-# so we don't need to worry about .dylib on macOS. CMake handles this.
+-_EXT_FILENAME = "ConfigReaderCpp.so"  # extension module we probe to locate the lib dir
++# Extension module we probe to locate the lib dir
++_EXT_NAME = "ConfigReaderCpp"
++
++
++def _has_extensions(d: Path) -> bool:
++    # The file suffix depends on the platform and on how CMake built the
++    # extension (e.g. .so, .pyd or .cpython-312-x86_64-linux-gnu.so), so check
++    # every suffix this Python can import.
++    return any((d / f"{_EXT_NAME}{suffix}").exists() for suffix in EXTENSION_SUFFIXES)
+ 
+ 
+ def _candidate_lib_dirs():
+@@ -41,11 +48,16 @@ def _candidate_lib_dirs():
+ 
+ 
+ def _ensure_extensions_are_importable():
++    # Installed layout: the extensions are already inside this package
++    if _has_extensions(Path(__file__).parent):
++        return
+     for d in _candidate_lib_dirs():
+-        if not (d / _EXT_FILENAME).exists():
++        if not _has_extensions(d):
+             continue
+-        if str(d) not in sys.path:
+-            sys.path.insert(0, str(d))
++        # Make the directory part of this package rather than of sys.path, so
++        # the extensions are only importable as fastframes._lib.*
++        if str(d) not in __path__:
++            __path__.append(str(d))
+         return
+     raise ImportError(
+         "Could not find the compiled FastFrames extension modules. "
+@@ -55,8 +67,8 @@ def _ensure_extensions_are_importable():
+ 
+ _ensure_extensions_are_importable()
+ 
+-import cppLogger  # noqa: E402,F401
++from . import cppLogger  # noqa: E402,F401
+ 
+ # Re-export every public symbol from ConfigReaderCpp so callers can do
+ # `from fastframes._lib import SampleWrapper`.
+-from ConfigReaderCpp import *  # noqa: E402,F401,F403
++from .ConfigReaderCpp import *  # noqa: E402,F401,F403

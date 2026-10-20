@@ -17,13 +17,16 @@ source:
   sha256: 2a710b8d720a1c5fc709bbab1534499d403cf039fb239a576ce4a297f22adb04
   patches:
     - install-python-files.patch
+    - import-extensions-from-package.patch
+    # Fixed upstream; drop once a release includes it
+    - merge-jobs-stdlib-dataclass.patch
 
 build:
   number: 0
   skip:
     - win
   script:
-    - cmake ${CMAKE_ARGS} -DPython_EXECUTABLE=$PYTHON -DPython_INCLUDE_DIR=$PREFIX/include/python${PY_VER} -DFASTFRAMES_PYTHON_INSTALL_DIR=$SP_DIR -DONNXRUNTIME_INCLUDE_DIRS=$PREFIX/include/onnxruntime -DONNXRUNTIME_LIBRARIES=$PREFIX/lib/libonnxruntime.so -S . -B build
+    - cmake ${CMAKE_ARGS} -DPython3_EXECUTABLE=$PYTHON -DPython3_INCLUDE_DIR=$PREFIX/include/python${PY_VER} -DFASTFRAMES_PYTHON_INSTALL_DIR=$SP_DIR -DONNXRUNTIME_INCLUDE_DIRS=$PREFIX/include/onnxruntime -DONNXRUNTIME_LIBRARIES=$PREFIX/lib/libonnxruntime.so -S . -B build
     - cmake --build build --clean-first --parallel="${CPU_COUNT}" --verbose
     - cmake --install build
 
