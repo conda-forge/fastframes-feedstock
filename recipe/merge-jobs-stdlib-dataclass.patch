@@ -1,0 +1,13 @@
+diff --git a/python/merge_jobs.py b/python/merge_jobs.py
+index 5e88f446..83413d36 100755
+--- a/python/merge_jobs.py
++++ b/python/merge_jobs.py
+@@ -5,7 +5,7 @@
+ import os
+ import sys
+ 
+-from attr import dataclass
++from dataclasses import dataclass
+ 
+ from ROOT import TFile, TH1D
+ 
