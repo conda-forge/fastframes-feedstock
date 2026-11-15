@@ -47,7 +47,12 @@ requirements:
     - root_cxx_standard
     - libboost-python-devel
     - python
-    - onnxruntime-cpp
+    # conda-forge stopped building onnxruntime for osx-64 after 1.22.2. Pinning
+    # the version here (not via the onnxruntime_cpp variant) keeps migrations
+    # from overriding it; other platforms follow the global pinning.
+    - if: osx and x86_64
+      then: onnxruntime-cpp 1.22.*
+      else: onnxruntime-cpp
   run:
     - python
     - pyyaml
