@@ -9,12 +9,11 @@ package:
   version: ${{ version }}
 
 source:
-  # A sha256 mismatch here is usually GitLab, not a wrong checksum: it sends the
-  # 200 header before generating this 341 MB archive, so CI jobs hitting it cold
-  # and all at once can each get an empty body (gitlab-org/gitlab#471955).
-  # Re-run them; fetching the tarball once by hand first warms GitLab's cache.
-  url: https://gitlab.cern.ch/atlas-amglab/fastframes/-/archive/v${{ version }}/fastframes-v${{ version }}.tar.gz
-  sha256: 2a710b8d720a1c5fc709bbab1534499d403cf039fb239a576ce4a297f22adb04
+  # Can't be a url because GitLab's /-/archive/ tarball endpoint is rate
+  # limited and all of our CI jobs fail.
+  git: https://gitlab.cern.ch/atlas-amglab/fastframes.git
+  tag: v${{ version }}
+  depth: 1
   patches:
     - install-python-files.patch
     - import-extensions-from-package.patch
