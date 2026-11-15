@@ -1,0 +1,5 @@
+onnxruntime_cpp:
+  # conda-forge stopped building onnxruntime for osx-64 after 1.22.2, so hold
+  # osx-64 there; other platforms follow the global pinning.
+  - if: osx and x86_64
+    then: "1.22"

@@ -10,3 +10,9 @@ provider:
   osx_arm64: default
   linux_aarch64: default
 test: native_and_emulated
+azure:
+  settings_osx:
+    variables:
+      # macOS runners don't have git-lfs, and for some reason lfs: false isn't enough
+      GIT_CONFIG_GLOBAL: /dev/null
+      GIT_CONFIG_NOSYSTEM: '1'
